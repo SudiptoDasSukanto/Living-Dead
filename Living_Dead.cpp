@@ -17,8 +17,8 @@ int main(int agr, char* args[])
 
     }
   //  Mix_Init();
-    Mix_Chunk *music=Mix_LoadWAV("/home/sukanto/Desktop/Project/Orin/res/intro.mp3");
-    Mix_Chunk *mouse_click=Mix_LoadWAV("/home/sukanto/Desktop/Project/Orin/res/mouseclick.mp3");
+    Mix_Chunk *music=Mix_LoadWAV("res/intro.mp3");
+    Mix_Chunk *mouse_click=Mix_LoadWAV("res/mouseclick.mp3");
     if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER)>0)
     {
         printf("video and timer: %s\n",SDL_GetError());
@@ -48,23 +48,7 @@ int main(int agr, char* args[])
         return 1;
     }
 
-    // SDL_Surface* surface = IMG_Load("res/man1.png");
-
-    // if (!surface)
-    // {
-    //     printf("Redbar Surface Error: %s\n",IMG_GetError());
-    //     SDL_DestroyRenderer(rend);
-    //     SDL_DestroyWindow(win);
-    //     SDL_Quit();
-    //     return 1;
-    // }
-
-    // SDL_Texture* tex = SDL_CreateTextureFromSurface(rend, surface);
-
-    // SDL_FreeSurface(surface);
-    //  SDL_RenderCopy(rend, tex, NULL, NULL);
-    //  SDL_RenderPresent(rend);
-    //  SDL_Delay(3000);
+    
     SDL_Texture *tex1,*tex2,*coin,*tex4;
     SDL_Surface* surface=IMG_Load("/home/sukanto/Desktop/Project/Orin/res/charli.png");
     if (!surface)
@@ -118,7 +102,7 @@ int main(int agr, char* args[])
     //SDL_SetTextureColorMod(tex3,200,200,200);
     SDL_FreeSurface(surface);
 
-    surface = IMG_Load("/home/sukanto/Desktop/Project/Orin/res/start.png");
+    surface = IMG_Load("res/start.png");
     if (!surface)
     {
         printf("start Surface Error: %s\n", IMG_GetError());
@@ -140,7 +124,7 @@ int main(int agr, char* args[])
 
     
 
-     surface=IMG_Load("/home/sukanto/Desktop/Project/Orin/res/wallpapersden.com_cod-vanguard-zombies_2048x1152(1).png");
+     surface=IMG_Load("res/FirstImage.png");
      if (!surface)
     {
         printf("start Surface Error: %s\n", IMG_GetError());
@@ -152,7 +136,7 @@ int main(int agr, char* args[])
     SDL_Texture *First_Back_tex0=SDL_CreateTextureFromSurface(rend,surface);
     SDL_FreeSurface(surface);
 
-    surface=IMG_Load("/home/sukanto/Desktop/Project/Orin/res/SecBack.png");
+    surface=IMG_Load("res/SecBack.png");
      if (!surface)
     {
         printf("start Surface Error: %s\n", IMG_GetError());
@@ -385,9 +369,6 @@ int main(int agr, char* args[])
         }
         if(main_game)
         {
-
-
-            // SDL_SetRenderDrawColor(rend,255,255,255,0);
             SDL_RenderClear(rend);
 
 
@@ -395,10 +376,13 @@ int main(int agr, char* args[])
             SDL_RenderCopy(rend, tex2, NULL,&dest2);
             SDL_RenderCopy(rend, tex2, NULL,&dest22);
             SDL_RenderCopy(rend, tex1, &playerRect, &playerPosition);
-          //  SDL_RenderCopy(rend, tex1, NULL, NULL);
             SDL_RenderCopyEx(rend,coin,0,&dest_coin,0,0,SDL_FLIP_HORIZONTAL);
 
-             dest_coin.x-=4;
+             dest_coin.x-=3;
+
+             if((playerPosition.x+playerPosition.w>= dest_coin.x && playerPosition.x <= dest_coin.x&& playerPosition.y <= dest_coin.y && playerPosition.y+playerPosition.h >= dest_coin.y)) {
+                dest_coin.x = -1280;
+             }
             // dest.x+=3 ;
 
 
@@ -477,21 +461,7 @@ int main(int agr, char* args[])
           
             SDL_RenderPresent(rend);
 
-            // int mousx, mousy;
-            // int button = SDL_GetMouseState(&mousx, &mousy);
-            //printf("%d %d\n", mousx, mousy);
-
-            // if (button & SDL_BUTTON(1))
-            // {
-            //     if (mousx >= start_rect.x && mousx <= (start_rect.x + start_rect.w) && mousy >= start_rect.y && mousy <= (start_rect.y + start_rect.h))
-            //     {
-            //         // Mix_PlayChannel(-1,mouse,4);
-            //         // SDL_Delay(1000);
-            //         main_game=1;
-            //         start=0;
-
-            //     }
-            // }
+            
             SDL_Delay(3000);
             
             start = 0;
@@ -505,7 +475,7 @@ int main(int agr, char* args[])
             // Mix_PlayChannel(-1,menu,0);
             SDL_RenderClear(rend);
             //SDL_RenderCopy(rend,fontTex,NULL,&textRect);
-            //Mix_PlayChannel(-1,music,0);
+            Mix_PlayChannel(-1,music,0);
             SDL_RenderCopy(rend,Sec_Back_tex0, NULL, NULL);
             SDL_RenderCopy(rend,NewGame_tex, NULL, &newgame);
             SDL_RenderCopy(rend,instruction_tex, NULL, NULL);
@@ -514,7 +484,7 @@ int main(int agr, char* args[])
 
             int mousx, mousy;
             int button = SDL_GetMouseState(&mousx, &mousy);
-            //printf("%d %d\n", mousx, mousy);
+    
 
             if (button & SDL_BUTTON(SDL_BUTTON_LEFT))
             {
