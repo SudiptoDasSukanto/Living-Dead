@@ -1,7 +1,7 @@
 # The Living Dead
 
 The Living Dead is a simple 2d platform game made for the first-year project of CSE, DU.
-First you need to run some command in your terniunal:
+First you need to run some command in your terminal:
 
 sudo apt-get install g++
 sudo apt-get install libsdl2-2.0
