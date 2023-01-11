@@ -1,5 +1,5 @@
 #OBJS specifies which files to compile as part of the project
-OBJS = live.cpp
+OBJS = main.cpp Init.cpp texture.cpp RectLoad.cpp event.cpp start.cpp MainGame.cpp gameover.cpp menu.cpp next_back.cpp
 
 #CC specifies which compiler we're using
 CC = g++
